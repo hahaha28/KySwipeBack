@@ -64,11 +64,13 @@ public class SwipeBackLayout extends FrameLayout {
 
 
         //绘制阴影
-        setLayerType(LAYER_TYPE_SOFTWARE, null);   //禁用硬件加速
-        mPaint.setShadowLayer(150,0,0,0xff000000);
-        mPaint.setColor(0xff000000);
-        canvas.drawRect(0,0,getWidth(),getHeight(),mPaint);
-
+//        if(isHardwareAccelerated()){
+//            setLayerType(LAYER_TYPE_SOFTWARE,null);
+//        }
+//        mPaint.setShadowLayer(50,0,0,0xff000000);
+//        mPaint.setColor(0xff000000);
+//        canvas.drawRect(0,0,getWidth(),getHeight(),mPaint);
+//        setLayerType(LAYER_TYPE_HARDWARE,null);
         //绘制背景由暗变亮效果
         float rate = 1 - (-1.0f * getScrollX() / getWidth());
         int alpha = (int) (maxAlpha * rate);
@@ -94,8 +96,6 @@ public class SwipeBackLayout extends FrameLayout {
         decorView.findViewById(android.R.id.content).setBackgroundColor(0xffffffff);
         decorView.removeViewAt(0);
         this.addView(decorChildView);
-        decorChildView.setPadding(0,0,0,0);
-        this.setPadding(0,0,0,0);
         decorView.addView(this);
         decorChildView.setClickable(true);
 
@@ -116,7 +116,7 @@ public class SwipeBackLayout extends FrameLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 xMove = ev.getRawX();
-                float diffX = Math.abs(xMove - xLastMove);
+                float diffX = xMove - xLastMove;
                 xLastMove = xMove;
                 if (diffX > mTouchSlop ) {
                     return true;
