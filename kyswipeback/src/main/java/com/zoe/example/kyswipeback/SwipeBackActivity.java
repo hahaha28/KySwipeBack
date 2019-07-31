@@ -16,6 +16,14 @@ public class SwipeBackActivity extends AppCompatActivity {
     }
 
     /**
+     * 是否开启侧滑，默认开启
+     * @param swipeBack true为开启
+     */
+    public void setSwipeBack(boolean swipeBack){
+        swipeBackLayout.setSwipeBack(swipeBack);
+    }
+
+    /**
      * 设置背景由暗变亮的范围，最大为255（最暗），最小为0
      * @param alpha 取值为0-255
      */

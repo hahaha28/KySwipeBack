@@ -38,6 +38,7 @@ public class SwipeBackLayout extends FrameLayout {
     private int statusBarColor;     //statusBar的颜色
     private boolean swipeStatusBar = true;    //是否滑动statusBar，默认为true
     private int maxAlpha = 60;      //阴影的变化范围，最大为255
+    private boolean isSwipeBack =true;       //整体开关
 
     public SwipeBackLayout(Context context) {
         this(context,null);
@@ -108,6 +109,9 @@ public class SwipeBackLayout extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if( !isSwipeBack ){
+            return false;
+        }
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 xDown = ev.getRawX();
@@ -159,6 +163,14 @@ public class SwipeBackLayout extends FrameLayout {
 
         }
         return true;
+    }
+
+    /**
+     * 是否开启侧滑，默认开启
+     * @param swipeBack true为开启
+     */
+    public void setSwipeBack(boolean swipeBack){
+        this.isSwipeBack=swipeBack;
     }
 
     /**
